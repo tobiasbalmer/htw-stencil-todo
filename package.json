@@ -2,8 +2,10 @@
   "name": "htw-stencil-todo",
   "version": "0.0.1",
   "description": "Stencil todo app for HTW students",
-  "module": "dist/esm/index.js",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
@@ -17,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@stencil/core": "0.18.1",
+    "@stencil/core": "^1.0.0-beta.1",
     "@stencil/sass": "^0.1.1"
   },
   "license": "MIT"

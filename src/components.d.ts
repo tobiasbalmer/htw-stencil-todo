@@ -5,30 +5,37 @@
  */
 
 
-import '@stencil/core';
-
-
+import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
+import { JSX } from '@stencil/core';
 
 
 export namespace Components {
-
   interface TodoApp {}
-  interface TodoAppAttributes extends StencilHTMLAttributes {}
-
   interface YourTodo {}
-  interface YourTodoAttributes extends StencilHTMLAttributes {}
 }
 
-declare global {
-  interface StencilElementInterfaces {
-    'TodoApp': Components.TodoApp;
-    'YourTodo': Components.YourTodo;
-  }
+declare namespace LocalJSX {
+  interface TodoApp extends JSXBase.HTMLAttributes {}
+  interface YourTodo extends JSXBase.HTMLAttributes {}
 
-  interface StencilIntrinsicElements {
-    'todo-app': Components.TodoAppAttributes;
-    'your-todo': Components.YourTodoAttributes;
+  interface IntrinsicElements {
+    'todo-app': TodoApp;
+    'your-todo': YourTodo;
   }
+}
+
+export { LocalJSX as JSX };
+
+
+declare module "@stencil/core" {
+  export namespace JSX {
+    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+  }
+}
+
+
+declare global {
+
 
 
   interface HTMLTodoAppElement extends Components.TodoApp, HTMLStencilElement {}
@@ -44,22 +51,10 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
-    'todo-app': HTMLTodoAppElement
-    'your-todo': HTMLYourTodoElement
-  }
-
-  interface ElementTagNameMap {
     'todo-app': HTMLTodoAppElement;
     'your-todo': HTMLYourTodoElement;
   }
 
-
-  export namespace JSX {
-    export interface Element {}
-    export interface IntrinsicElements extends StencilIntrinsicElements {
-      [tagName: string]: any;
-    }
-  }
-  export interface HTMLAttributes extends StencilHTMLAttributes {}
-
+  interface ElementTagNameMap extends HTMLElementTagNameMap {}
 }
+
