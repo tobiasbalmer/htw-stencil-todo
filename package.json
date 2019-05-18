@@ -1,6 +1,6 @@
 {
   "name": "htw-stencil-todo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stencil todo app for HTW students",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
